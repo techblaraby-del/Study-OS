@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0a12">
+  <title>StudyOS — Consistency Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="StudyOS home"><span class="brand-mark">S</span><span>study<span class="brand-accent">OS</span><small>YOUR STUDY COMMAND CENTER</small></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <a class="nav-item active" href="#overview"><span>◈</span> Overview</a>
+      <a class="nav-item" href="#log"><span>＋</span> Log a session</a>
+      <a class="nav-item" href="#history"><span>▦</span> Study history</a>
+      <div class="sidebar-bottom">
+        <div class="quote-mark">“</div>
+        <p>Consistency beats intensity when intensity doesn't last.</p>
+        <span>THE LONG GAME</span>
+        <div class="local-note"><span class="live-dot"></span> Saved on this device</div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><div class="eyebrow" id="today-label">YOUR PROGRESS, ONE DAY AT A TIME</div><h1>Study dashboard<span class="title-dot">.</span></h1></div>
+        <div class="top-actions"><span class="year-chip">2ÈME BAC · SCIENCES PHYSIQUES</span><button id="export-btn" class="btn btn-quiet" type="button">↗ Export data</button></div>
+      </header>
+
+      <section class="welcome-row">
+        <div><p class="muted small">WELCOME BACK</p><h2>Build your future, <span>one session at a time.</span></h2><p class="muted">Track the work. Trust the process. Let the numbers tell your story.</p></div>
+        <div class="week-select"><label for="week-start">WEEK OF</label><input type="date" id="week-start"></div>
+      </section>
+
+      <section class="stats-grid" aria-label="Study statistics">
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">STUDY TIME THIS WEEK</span><span class="stat-icon purple">◷</span></div><div class="stat-value"><span id="week-hours">0.0</span><small>hrs</small></div><div class="stat-foot"><span id="weekly-target-note">of 18-hour target</span><div class="mini-track"><span id="hours-progress"></span></div></div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">CONSISTENCY</span><span class="stat-icon pink">✳</span></div><div class="stat-value"><span id="consistency">0</span><small>%</small></div><div class="stat-foot"><span id="consistency-note">Days studied this week</span><div class="mini-track"><span id="consistency-progress"></span></div></div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">CURRENT STREAK</span><span class="stat-icon gold">♨</span></div><div class="stat-value"><span id="streak">0</span><small>days</small></div><div class="stat-foot"><span>Keep showing up</span><span class="streak-flame">✦ ✦ ✦</span></div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">EXERCISES DONE</span><span class="stat-icon blue">⌁</span></div><div class="stat-value"><span id="week-exercises">0</span><small>total</small></div><div class="stat-foot"><span id="session-count">0 sessions logged</span><span class="tiny-spark">↗</span></div></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel weekly-panel" id="overview">
+          <div class="panel-heading"><div><div class="eyebrow">YOUR RHYTHM</div><h3>This week's activity</h3></div><span class="subtle-tag">LAST 7 DAYS</span></div>
+          <div class="week-chart" id="week-chart" aria-label="Study time by day"></div>
+          <div class="chart-legend"><span><i class="legend-dot"></i> Study hours</span><span id="chart-total">0 hours recorded</span></div>
+        </article>
+        <article class="panel goal-panel">
+          <div class="panel-heading"><div><div class="eyebrow">SMALL WINS ADD UP</div><h3>Weekly target</h3></div><span class="target-icon">◎</span></div>
+          <div class="goal-ring-wrap"><div class="goal-ring" id="goal-ring"><div><strong id="goal-percent">0%</strong><span>COMPLETE</span></div></div></div>
+          <div class="goal-summary"><strong id="goal-hours">0 / 18 hrs</strong><span id="goal-message">Start with one focused session.</span></div>
+          <div class="goal-edit"><label for="target-hours">Weekly target (hours)</label><input type="number" id="target-hours" min="1" max="100" value="18"><button class="btn btn-small" id="save-target" type="button">Update</button></div>
+        </article>
+      </section>
+
+      <section class="content-grid lower-grid">
+        <article class="panel subject-panel">
+          <div class="panel-heading"><div><div class="eyebrow">WHERE YOUR TIME GOES</div><h3>Subject breakdown</h3></div><span class="subtle-tag">THIS WEEK</span></div>
+          <div id="subject-breakdown" class="subject-breakdown"><div class="empty-state">Your subject breakdown will appear after your first session.</div></div>
+        </article>
+        <article class="panel calendar-panel">
+          <div class="panel-heading"><div><div class="eyebrow">SHOWING UP MATTERS</div><h3>Consistency map</h3></div><span class="subtle-tag">12 WEEKS</span></div>
+          <div id="heatmap" class="heatmap"></div>
+          <div class="heat-legend"><span>Less</span><i class="heat h0"></i><i class="heat h1"></i><i class="heat h2"></i><i class="heat h3"></i><i class="heat h4"></i><span>More</span></div>
+        </article>
+      </section>
+
+      <section class="panel log-panel" id="log">
+        <div class="panel-heading"><div><div class="eyebrow">MAKE IT COUNT</div><h3>Log a study session</h3><p class="muted small">Every honest entry is proof that you showed up.</p></div><span class="log-symbol">✎</span></div>
+        <form id="session-form">
+          <div class="form-grid">
+            <div class="field"><label for="session-date">DATE</label><input type="date" id="session-date" required></div>
+            <div class="field"><label for="subject">SUBJECT</label><select id="subject" required><option value="Mathematics">Mathematics</option><option value="Physics & Chemistry">Physics & Chemistry</option><option value="SVT">SVT</option><option value="Philosophy">Philosophy</option><option value="English">English</option><option value="French">French</option><option value="Arabic">Arabic</option><option value="Islamic Education">Islamic Education</option><option value="Other">Other</option></select></div>
+            <div class="field"><label for="duration">DURATION (MINUTES)</label><input type="number" id="duration" min="1" max="1440" placeholder="e.g. 45" required></div>
+            <div class="field"><label for="exercises">EXERCISES COMPLETED</label><input type="number" id="exercises" min="0" max="1000" value="0" required></div>
+            <div class="field field-wide"><label for="session-note">LESSON / WHAT DID YOU WORK ON?</label><input type="text" id="session-note" maxlength="160" placeholder="e.g. Chemical kinetics — reaction rate exercises"></div>
+          </div>
+          <div class="form-footer"><p><span class="live-dot"></span> Your entry is saved locally when submitted.</p><button class="btn btn-primary" type="submit">＋ Save session</button></div>
+          <div id="form-message" class="form-message" role="status"></div>
+        </form>
+      </section>
+
+      <section class="panel history-panel" id="history">
+        <div class="panel-heading"><div><div class="eyebrow">YOUR WORK, RECORDED</div><h3>Recent sessions</h3></div><button class="btn btn-quiet btn-small" id="clear-week-filter" type="button">Show all</button></div>
+        <div class="table-wrap"><table><thead><tr><th>DATE</th><th>SUBJECT / LESSON</th><th>TIME</th><th>EXERCISES</th><th></th></tr></thead><tbody id="session-table"><tr><td colspan="5" class="empty-table">No sessions yet. Log your first study session above.</td></tr></tbody></table></div>
+      </section>
+      <footer><span>STUDYOS <span class="title-dot">/</span> VERSION 1.0</span><span>Progress, not perfection.</span><button id="reset-btn" class="text-button" type="button">Reset all data</button></footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
